@@ -70,6 +70,11 @@ The person with best test coverage will win a small present from the instructor 
 ## Notes
 
 Describe any challenges encountered while building the app.
+  
+* [ ] Using FactoryGirl
+* [ ] Test Controller with parameters
+* [ ] Test with user log in
+* [ ] Nested attributes for form
 
 ## License
 
