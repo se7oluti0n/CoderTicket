@@ -39,6 +39,8 @@ gem 'font-awesome-rails'
 gem 'font-kit-rails', '~> 1.2.0'
 
 gem 'devise'
+
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -51,7 +53,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
-
+  gem 'simplecov', :require => false, :group => :test
   gem 'rails-controller-testing'
 end
 

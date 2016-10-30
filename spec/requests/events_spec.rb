@@ -5,10 +5,10 @@ RSpec.describe "Events", type: :request do
     it "accepts search on the homepage" do
       a = Event.create!(name: "Dam Vinh Hung's concert", starts_at: 2.days.ago, ends_at: 2.day.from_now, extended_html_description: "a past event",
         venue: Venue.new, category: Category.new)
-      b = Event.create!(name: "Scorpion in Vietnam", starts_at: 2.days.ago, ends_at: 1.day.from_now, extended_html_description: " a future event",
+      b = Event.create!(name: "Scorpion in Vietnam", published_at: Time.now, starts_at: 2.days.ago, ends_at: 1.day.from_now, extended_html_description: " a future event",
         venue: Venue.new, category: Category.new)
 
-      get root_path(search: "Dam Vinh Hung")
+      get root_path(search: "Scorpion")
       expect(response).to have_http_status(200)
       expect(response.body).to include "Scorpion in Vietnam"
       expect(response.body).to_not include "Dam Vinh Hung"
