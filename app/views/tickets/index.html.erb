@@ -44,8 +44,8 @@
       <%= text_field_tag :name, user_signed_in? ? current_user.name : params[:name], class: 'form-control' %>
       <%= label_tag :email %>
       <%= text_field_tag :email, user_signed_in? ? current_user.email : params[:email], class: 'form-control' %>
-      <%= label_tag :phone_number %>
-      <%= text_field_tag :phone_number, nil, class: 'form-control' %>  
+      <%= label_tag :phone %>
+      <%= text_field_tag :phone, nil, class: 'form-control' %>  
       <%= label_tag :address %>
       <%= text_field_tag :address, nil, class: 'form-control' %>  
     </div>
