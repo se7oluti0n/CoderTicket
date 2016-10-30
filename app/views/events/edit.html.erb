@@ -1,0 +1,30 @@
+<div class="container-fluid no-pad events-detail">
+  <div class="row no-pad">
+	<%= form_tag event_path, method: 'patch' do %>
+	  <%= label_tag :category %>
+	  <%= select_tag :category, options_from_collection_for_select(@categories, "id", "name", @event.category_id), class: 'form-control' %>
+	  
+	  <%= label_tag :starts_at %>
+	  <%= text_field_tag :starts_at, @event.starts_at, class: 'form-control' %>
+	  	  <%= label_tag :ends_at %>
+	  <%= text_field_tag :ends_at, @event.ends_at, class: 'form-control' %>
+
+	  	  <%= label_tag :hero_image_url %>
+	  <%= text_field_tag :hero_image_url, @event.hero_image_url, class: 'form-control' %>
+
+	  	  	  <%= label_tag :name %>
+	  <%= text_field_tag :name, @event.name, class: 'form-control' %>
+
+	  	  	  	  <%= label_tag :venue_name %>
+	  <%= text_field_tag :venue_name, @event.venue.name, class: 'form-control' %>
+	  	  	  <%= label_tag :address %>
+	  <%= text_field_tag :address, @event.venue.full_address, class: 'form-control' %>
+
+	  	  	  	  <%= label_tag :region %>
+	  <%= select_tag :region, options_from_collection_for_select(@regions, "id", "name", @event.venue.region_id), class: 'form-control' %>
+
+	  <%= submit_tag "Update", class: 'btn btn-primary' %>
+	<%end%>
+  </div>
+
+ </div>

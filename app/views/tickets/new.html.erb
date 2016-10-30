@@ -1,47 +1,42 @@
-<div class="container-fluid tickets-buy">
-  <div class="row tickets-header">
-    <div class="col-xs-12 col-md-11 col-md-offset-1">
-      <h3> <%= @event.name %> </h3>
-      <div class="pull-left">
-        <%= fa_icon 'map-marker' %>
-      </div>
-      <div class="venue-details">
-       <%= @event.venue.name %>
-       <br/>
-       <%= @event.venue.full_address %>
-      </div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-11 col-md-offset-1">  
+			<table class="table">
+				<th> Ticket Type </th>
+				<th> Unit Price </th>
+				<th> Max quantity </th>
 
-      <div class="pull-left">
-        <%= fa_icon 'clock-o' %>
-      </div>
-      <div class="time-details"> 
-        <%= @event.starts_at.strftime('%A, %d %b %Y %l:%M %p') %> 
-      </div>
+				<% @event.ticket_types.each do |type| %>
+				<tr>
+					<td> <%= type.name %> </td>
+					<td> <%= number_to_currency(type.price, unit: 'VND ', precision: 0) %> </td>
+					<td> <%= type.max_quantity %></td> 
+					<td> <%= link_to "Delete", event_ticket_path(@event, type), method: 'delete', class: 'btn btn-danger' %> </td>
+				</tr>
+				<% end %> 
+				<tr>
+					<%= form_for [@event, @ticket], url: event_tickets_path do |f| %>
+					<% if @ticket.errors.any? %>
+					<div id="error_explanation">
+					<h2><%= pluralize(article.errors.count, "error") %> prohibited this titcket from being saved:</h2>
 
+						<ul>
+							<% @ticket.errors.full_messages.each do |message| %>
+							<li><%= message %></li>
+							<% end %>
+						</ul>
+					</div>
+					<% end %>
+					<td> <%= f.text_field :name %> </td>
+					<td> <%= f.text_field :price, class: "form-control" %> </td>
+					<td> <%= f.text_field :max_quantity, class: "form-control" %></td> 
+					<td> <%= f.submit "Add Ticket Type", class: 'btn btn-primary'%> </td>
+					<%end%>
+				</tr>
 
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-11 col-md-offset-1">  
-      <table class="table">
-        <th> Ticket Type </th>
-        <th> Unit Price </th>
-        <th> Quantity </th>
-      
-        <% @event.ticket_types.each do |type| %>
-        <tr>
-          <td> <%= type.name %> </td>
-          <td> <%= number_to_currency(type.price, unit: 'VND ', precision: 0) %> </td>
-          <td> <%= select_tag('quantity', options_for_select(0..10)) %></td> 
-        </tr>
-        <% end %> 
-      </table>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-2 col-md-offset-5">
-      <button class="btn btn-success btn-lg btn-block"> Buy </button>
-    </div>
-  <div>
-</div>  
+			</table>
+		</div>
+	</div>
+</div>
+
 

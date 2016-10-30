@@ -2,20 +2,26 @@ require 'rails_helper'
 
 RSpec.describe Event, type: :model do
   describe "Upcomming event" do
-    it "Upcomming event should not show past event" do
-      region = FactoryGirl.create(:region)
-      venue = FactoryGirl.create(:venue, region_id: region.id)
-      category = FactoryGirl.create(:category)
-      event = FactoryGirl.create(:event, ends_at: 'Oct 20 2016 00:00:00', venue_id: venue.id, category_id: category.id)
-
-      expect(Event.up_comming_event).to eq []
+    it "return [] when there are only past events" do
+      Event.create!(starts_at: 2.days.ago, ends_at: 1.day.ago, extended_html_description: " a past event",
+                    venue: Venue.new, category: Category.new)
+      expect(Event.upcoming_events).to eq []
     end
 
-    it "Return nothing if no event" do
-      expect(Event.up_comming_event).to eq []
+    it "return [b] when there are a past event 'a' and a future event 'b'" do
+      a = Event.create!(name: "a", starts_at: 2.days.ago, ends_at: 1.day.ago, extended_html_description: "a past event",
+                        venue: Venue.new, category: Category.new)
+      b = Event.create!(name: "b", starts_at: 2.days.ago, ends_at: 1.day.from_now, extended_html_description: " a future event",
+                        venue: Venue.new, category: Category.new)
+      expect(Event.upcoming_events).to eq [b]
     end
 
-    it "Only see event that published"  
-    it "Event must have at least one ticket type before published"
+    describe "Publishing event" do
+      it "return if no datetime in published_at" do
+        a = Event.create!(name: "a", starts_at: 2.days.ago, ends_at: 1.day.ago, extended_html_description: "a past event",
+                          venue: Venue.new, category: Category.new)
+        expect(Event.published).to eq []
+      end
+    end
   end 
 end

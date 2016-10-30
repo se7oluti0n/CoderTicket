@@ -1,0 +1,60 @@
+<div class="container-fluid tickets-buy">
+  <div class="row tickets-header">
+    <div class="col-xs-12 col-md-11 col-md-offset-1">
+      <h3> <%= @event.name %> </h3>
+      <div class="pull-left">
+        <%= fa_icon 'map-marker' %>
+      </div>
+      <div class="venue-details">
+        <%= @event.venue.name %>
+        <br/>
+        <%= @event.venue.full_address %>
+      </div>
+
+      <div class="pull-left">
+        <%= fa_icon 'clock-o' %>
+      </div>
+      <div class="time-details"> 
+        <%= @event.starts_at.strftime('%A, %d %b %Y %l:%M %p') %> 
+      </div>
+
+
+    </div>
+  </div>
+  <%= form_tag event_orders_path(@event) do %>
+    <div class="row">
+      <div class="col-md-11 col-md-offset-1">  
+        <table class="table">
+          <th> Ticket Type </th>
+          <th> Unit Price </th>
+          <th> Quantity </th>
+
+          <% @event.ticket_types.each do |type| %>
+            <tr>
+              <td> <%= type.name %> </td>
+              <td> <%= number_to_currency(type.price, unit: 'VND ', precision: 0) %> </td>
+              <td> <%= select_tag "quantity[#{type.id}]", options_for_select(0..maxOrderTicket(type)) %></td> 
+            </tr>
+          <% end %> 
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <%= label_tag :name %>
+      <%= text_field_tag :name, user_signed_in? ? current_user.name : params[:name], class: 'form-control' %>
+      <%= label_tag :email %>
+      <%= text_field_tag :email, user_signed_in? ? current_user.email : params[:email], class: 'form-control' %>
+      <%= label_tag :phone_number %>
+      <%= text_field_tag :phone_number, nil, class: 'form-control' %>  
+      <%= label_tag :address %>
+      <%= text_field_tag :address, nil, class: 'form-control' %>  
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 col-md-offset-5">
+        <%= submit_tag "Buy", class: 'btn btn-success btn-lg btn-block' %>
+      </div>
+      <div>
+      <% end %>
+      </div>  
+    </div>

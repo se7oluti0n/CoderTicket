@@ -2,8 +2,8 @@
   <div class="row no-pad">
     <div class="col-md-3 sidebar">
       <p>
-        <%= fa_icon 'ticket' %>
-        Price
+      <%= fa_icon 'ticket' %>
+      Price
       </p>
       <h1> Hot Events </h1>
       <div class="ticket-list">
@@ -19,13 +19,30 @@
           </div>
           <div class="clearfix"></div>
         <% end %>
-        <%= link_to new_event_ticket_path(@event) do %>
-          <button class='btn btn-lg btn-block btn-danger'> BOOK NOW </button>
+        <% if user_signed_in? and current_user.events.include? @event %>
+          <%= link_to edit_event_path(@event) do %>
+            <button class='btn btn-lg btn-block btn-danger'> EDIT DETAILS </button>
+          <% end %>
+
+          <%= link_to new_event_ticket_path(@event) do %>
+            <button class='btn btn-lg btn-block btn-danger'> EDIT TICKETS </button>
+          <% end %>
+
+          <% if not @event.published? %>
+            <%= link_to publish_event_path(@event) do %>
+              <button class='btn btn-lg btn-block btn-danger'> PUBLISH </button>
+            <% end %>
+          <% end %>
+
+        <% else %>
+          <%= link_to event_tickets_path(@event) do %>
+            <button class='btn btn-lg btn-block btn-danger'> BOOK NOW </button>
+          <% end %>
         <% end %>
       </div>
     </div>
     <div class="col-md-9 event-content">
-      <div class="hero-img hidden-sm-down" style="background-image: url(<%= @event.hero_image_url %>); background-size: cover;"> </div>
+      <div class="hero-img hidden-sm-down" style="background-image: url(<%= @event.hero_image_url %>); back<ground-size: cover;"> </div>
       <div class="container">
         <h3> <%= @event.name %> </h3>
         <div class="pull-left">
@@ -35,15 +52,15 @@
           <%= @event.starts_at.strftime('%A, %d %b %Y %l:%M %p') %> 
         </div>
 
-        
+
 
         <div class="pull-left">
           <%= fa_icon 'map-marker' %>
         </div>
         <div class="venue-details">
-         <%= @event.venue.name %>
-         <br/>
-         <%= @event.venue.full_address %>
+          <%= @event.venue.name %>
+          <br/>
+          <%= @event.venue.full_address %>
         </div>
 
         <div class="img-spacer">

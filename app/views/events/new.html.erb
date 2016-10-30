@@ -1,0 +1,30 @@
+<div class="container-fluid no-pad events-detail">
+  <div class="row no-pad">
+    <%= form_tag events_path do %>
+      <%= label_tag :category %>
+      <%= select_tag :category, options_from_collection_for_select(Category.all, "id", "name"), class: 'form-control' %>
+
+      <%= label_tag :starts_at %>
+      <%= text_field_tag :starts_at, nil, class: 'form-control' %>
+      <%= label_tag :ends_at %>
+      <%= text_field_tag :ends_at, nil, class: 'form-control' %>
+
+      <%= label_tag :hero_image_url %>
+      <%= text_field_tag :hero_image_url, nil, class: 'form-control' %>
+
+      <%= label_tag :name %>
+      <%= text_field_tag :name, nil, class: 'form-control' %>
+
+      <%= label_tag :venue_name %>
+      <%= text_field_tag :venue_name, nil, class: 'form-control' %>
+      <%= label_tag :address %>
+      <%= text_field_tag :address, nil, class: 'form-control' %>
+
+      <%= label_tag :region %>
+      <%= select_tag :region, options_from_collection_for_select(Region.all, "id", "name"), class: 'form-control' %>
+
+      <%= submit_tag "Create", class: 'btn btn-primary' %>
+    <%end%>
+  </div>
+
+</div>
