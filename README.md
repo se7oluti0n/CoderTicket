@@ -76,6 +76,7 @@ Describe any challenges encountered while building the app.
 * [ ] Test with user log in
 * [ ] Nested attributes for form
 
+![Video Walkthrough](http://i.imgur.com/u9314et.gif)
 ## License
 
     Copyright [2016] [Truong Tuan Manh]
