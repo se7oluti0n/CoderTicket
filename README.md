@@ -71,6 +71,7 @@ The person with best test coverage will win a small present from the instructor 
 
 Describe any challenges encountered while building the app.
 
+![Video Walkthrough](http://i.imgur.com/u9314et.gif)
 ## License
 
     Copyright [2016] [Truong Tuan Manh]
