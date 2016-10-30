@@ -32,14 +32,8 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe "Publish event" do
-    it "no published when not enough ticket type" do
-      event =  event = Event.create name: "Pblish Event", starts_at: 3.days.ago, ends_at: 2.days.from_now, published_at: Time.now, extended_html_description: "Helleo", venue: Venue.new, category: Category.new 
-      get :publish, :event_id => event.id
-      expect(flash[error]).to be_present 
-    end
-    it "no published when not the event owner" do
-      
-    end
+    it "no published when not enough ticket type"
+    it "no published when not the event owner"
     it "can publish when have enough ticket type and not  publised yet"
     it "can not publish again when published"
   end

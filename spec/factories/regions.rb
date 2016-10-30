@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :region do
-    name "Ha Noi"
+    name "Ho Chi Minh"
   end
 end
